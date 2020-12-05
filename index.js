@@ -8,10 +8,27 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('chat message', msg => {
-        console.log(msg);
-        io.emit("chat message", msg);
-    })
+
+
+
+    socket.on('onLiveChat', (data) => {
+    console.log(data);
+    console.log("called socket server")
+        io.emit("onLiveChat", data);
+    }),
+
+
+
+
+    socket.on('sendGifts', (data) => {
+      console.log("Gift socket");
+      console.log(data);
+      console.log("called socket server")
+          io.emit("sendGifts", data);
+      })
+
+
+
   });
 
 http.listen(3000, () => {
